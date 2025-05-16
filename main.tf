@@ -24,6 +24,7 @@ resource "aws_cloudwatch_contributor_managed_insight_rule" "managed_insight_rule
   }
   resource_arn  = each.value.resource_arn
   template_name = each.value.template_name
+  tags          = local.all_tags
   #rule_state    = try(each.value.rule_state, "ENABLED")
 }
 
@@ -34,4 +35,5 @@ resource "aws_cloudwatch_contributor_insight_rule" "insight_rule" {
   rule_name       = each.value.name
   rule_state      = try(each.value.rule_state, "ENABLED")
   rule_definition = jsonencode(each.value.rule_definition)
+  tags            = local.all_tags
 }
